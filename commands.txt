@@ -1,0 +1,22 @@
+python -m pytest --version
+python -m pytest -v
+
+cd /d C:\mlops-hello-demo
+docker pull python:3.12-slim
+docker build -t mlops-hello-demo .
+docker images
+docker run --rm mlops-hello-demo
+
+docker run --rm mlops-hello-demo python -m pytest -v
+
+#optional
+docker ps
+docker ps -a
+docker image ls
+
+python -m pip show evidently
+python -m pip install --upgrade evidently
+
+docker pull python:3.12-slim
+docker build -t mlops-hello-demo .
+docker run --rm mlops-hello-demo
