@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/YOUR_USERNAME/mlops-hello-demo.git'
+                    url: 'https://github.com/aditirewadkar3/MLdevopsInternal.git'
             }
         }
 
