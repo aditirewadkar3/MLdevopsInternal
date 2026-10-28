@@ -5,13 +5,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/aditirewadkar3/MLdevopsInternal.git'
+                echo 'Using the repository already checked out by Jenkins'
+                bat 'git remote -v'
             }
         }
 
         stage('Run Application') {
             steps {
+                bat 'python --version'
                 bat 'python hello.py'
             }
         }
