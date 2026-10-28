@@ -5,21 +5,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Using the repository already checked out by Jenkins'
+                echo 'Repository checked out successfully'
                 bat 'git remote -v'
             }
         }
 
         stage('Run Application') {
             steps {
-                bat 'python --version'
-                bat 'python hello.py'
+                bat '"C:/Users/Aditi/AppData/Local/Programs/Python/Python311/python.exe" --version'
+                bat '"C:/Users/Aditi/AppData/Local/Programs/Python/Python311/python.exe" hello.py'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'python -m pytest -v'
+                bat '"C:/Users/Aditi/AppData/Local/Programs/Python/Python311/python.exe" -m pytest -v'
             }
         }
     }
