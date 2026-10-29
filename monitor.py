@@ -1,40 +1,32 @@
 
-import pandas as pd
-from evidently import Dataset, DataDefinition, Report
+from sklearn import datasets
+from evidently import Report
 from evidently.presets import DataDriftPreset
 
-# Reference data: the baseline
-reference_df = pd.DataFrame({
-    "age": [22, 25, 28, 30, 32, 35],
-    "income": [20000, 25000, 28000, 30000, 32000, 35000]
-})
+# Load the built-in Iris dataset
+iris = datasets.load_iris(as_frame=True)
+iris_df = iris.frame
 
-# Current data: the incoming data
-current_df = pd.DataFrame({
-    "age": [40, 42, 45, 48, 50, 55],
-    "income": [50000, 52000, 55000, 58000, 60000, 65000]
-})
+print("Iris dataset loaded successfully")
+print("Dataset shape:", iris_df.shape)
+print(iris_df.head())
 
-schema = DataDefinition(
-    numerical_columns=["age", "income"]
-)
+# Reference data and current data
+reference_data = iris_df.iloc[60:120].copy()
+current_data = iris_df.iloc[:60].copy()
 
-reference = Dataset.from_pandas(
-    reference_df,
-    data_definition=schema
-)
-
-current = Dataset.from_pandas(
-    current_df,
-    data_definition=schema
-)
-
+# Generate a data drift report
 report = Report([
     DataDriftPreset()
 ])
 
-result = report.run(current, reference)
-result.save_html("evidently_report.html")
+result = report.run(
+    current_data=current_data,
+    reference_data=reference_data
+)
 
-print("Monitoring completed.")
-print("Report saved as evidently_report.html")
+# Save report
+result.save_html("iris_drift_report.html")
+
+print("\nEvidently monitoring completed!")
+print("Report saved as iris_drift_report.html")
