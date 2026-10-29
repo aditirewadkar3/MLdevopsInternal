@@ -10,16 +10,21 @@ pipeline {
             }
         }
 
+        stage('Check Python') {
+            steps {
+                bat '"C:\\Program Files\\Python311\\python.exe" --version'
+            }
+        }
+
         stage('Run Application') {
             steps {
-                bat '"C:/Program Files/Python311/python.exe" --version'
-                bat '"C:/Program Files/Python311/python.exe" hello.py'
+                bat '"C:\\Program Files\\Python311\\python.exe" hello.py'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat '"C:/Program Files/Python311/python.exe" -m pytest -v'
+                bat '"C:\\Program Files\\Python311\\python.exe" -m pytest -v'
             }
         }
     }
